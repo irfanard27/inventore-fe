@@ -16,6 +16,10 @@ export const baseApi = fetchBaseQuery({
 
     if (response.status === 401) {
       localStorage.removeItem("token");
+      const path = window.location.pathname;
+      if (path !== "/auth/login") {
+        window.location.href = "/auth/login";
+      }
     }
 
     return false;

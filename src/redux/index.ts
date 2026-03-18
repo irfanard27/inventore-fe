@@ -6,7 +6,10 @@ import { authService } from "./api-service/auth-service";
 import { inventoryService } from "./api-service/inventory-service";
 import { categoryService } from "./api-service/category-service";
 import { warehouseService } from "./api-service/warehouse-service";
+import { transactionService } from "./api-service/transaction-service";
 import inventoryReducer from "./slices/inventory-slice";
+import transactionReducer from "./slices/transaction-slice";
+import { dashboardService } from "./api-service/dashboard-service";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
     [inventoryService.reducerPath]: inventoryService.reducer,
     [categoryService.reducerPath]: categoryService.reducer,
     [warehouseService.reducerPath]: warehouseService.reducer,
+    [transactionService.reducerPath]: transactionService.reducer,
+    [dashboardService.reducerPath]: dashboardService.reducer,
+    transactionState: transactionReducer,
     inventoryState: inventoryReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -22,6 +28,8 @@ export const store = configureStore({
       inventoryService.middleware,
       categoryService.middleware,
       warehouseService.middleware,
+      transactionService.middleware,
+      dashboardService.middleware,
     ),
 });
 

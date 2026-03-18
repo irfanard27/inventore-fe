@@ -1,9 +1,10 @@
 import type { Inventory } from "@/interface/inventory";
-import { useAppSelector } from "@/redux";
+import { store, useAppSelector } from "@/redux";
 import {
   useDeleteInventoryMutation,
   useInventoryListQuery,
 } from "@/redux/api-service/inventory-service";
+import { setFilter } from "@/redux/slices/inventory-slice";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
@@ -93,6 +94,13 @@ export default function InventoryTable({ onEdit }: InventoryTableProps) {
         loading={isLoading}
         rowKey="id"
         columns={columns}
+        pagination={{
+          pageSize: inventoryState.pagination.pageSize,
+          total: inventoryState.pagination.total,
+          onChange: (page) => {
+            store.dispatch(setFilter({ page }));
+          },
+        }}
       />
       {modalContext}
     </>

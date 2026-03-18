@@ -1,5 +1,5 @@
 import { MainLayout } from "@/components/layouts/main-layout";
-import { Button, Flex, Space } from "antd";
+import { Button, Card, Flex, Space } from "antd";
 import InventoryTable from "./components/inventory-table";
 import InventoryForm from "./components/inventory-form";
 import { useRef } from "react";
@@ -17,21 +17,22 @@ export default function Inventory() {
     <MainLayout>
       <Flex justify="center">
         <div style={{ width: 1000 }}>
-          <Flex vertical gap={16}>
-            <Flex justify="space-between" align="center">
-              <h2>Inventory List</h2>
-
+          <Card
+            title="Inventory List"
+            extra={
               <Space>
                 <Button type="primary" onClick={() => handleCreateInventory()}>
                   Create Inventory
                 </Button>
               </Space>
+            }
+          >
+            <Flex vertical gap={16}>
+              <InventoryFilter />
+
+              <InventoryTable onEdit={handleCreateInventory} />
             </Flex>
-
-            <InventoryFilter />
-
-            <InventoryTable onEdit={handleCreateInventory} />
-          </Flex>
+          </Card>
         </div>
       </Flex>
 

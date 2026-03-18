@@ -1,8 +1,17 @@
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Button, Flex, Space } from "antd";
 import WarehouseTable from "./components/warehouse-table";
+import WarehouseForm from "./components/warehouse-form";
+import { useRef } from "react";
+import type { WarehouseFormRef } from "./components/warehouse-form";
 
 export default function Warehouse() {
+  const warehouseFormRef = useRef<WarehouseFormRef>(null);
+
+  const handleCreateWarehouse = (id?: string) => {
+    warehouseFormRef.current?.open(id);
+  };
+
   return (
     <MainLayout>
       <Flex justify="center">
@@ -12,16 +21,18 @@ export default function Warehouse() {
               <h2>Warehouse List</h2>
 
               <Space>
-                <Button type="primary">
+                <Button type="primary" onClick={() => handleCreateWarehouse()}>
                   Create Warehouse
                 </Button>
               </Space>
             </Flex>
 
-            <WarehouseTable />
+            <WarehouseTable onEdit={handleCreateWarehouse} />
           </Flex>
         </div>
       </Flex>
+
+      <WarehouseForm ref={warehouseFormRef} />
     </MainLayout>
   );
 }

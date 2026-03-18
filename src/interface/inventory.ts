@@ -16,7 +16,9 @@ export interface Inventory {
 export interface CreateInventoryRequest extends Omit<
   Inventory,
   "stock_status" | "warehouse_name" | "category_name"
-> {}
+> {
+  // Additional properties can be added here if needed
+}
 
 export interface UpdateInventoryRequest extends CreateInventoryRequest {
   id: string;

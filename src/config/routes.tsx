@@ -1,13 +1,16 @@
 import { createBrowserRouter } from "react-router";
 import { Login } from "@/pages/auth/login";
-import Home from "@/pages/home";
+
 import Inventory from "@/pages/inventory";
 import Warehouse from "@/pages/warehouse";
+import Category from "@/pages/category";
+import Transactions from "@/pages/transactions";
+import Dashboard from "@/pages/dashboard";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    Component: Home,
+    Component: Dashboard,
   },
   {
     path: "/auth/login",
@@ -21,5 +24,13 @@ export const routes = createBrowserRouter([
   {
     path: "/warehouse",
     Component: Warehouse,
+  },
+  {
+    path: "/category",
+    Component: Category,
+  },
+  {
+    path: "/transactions",
+    Component: Transactions,
   },
 ]);

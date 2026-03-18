@@ -17,6 +17,78 @@ export interface Transaction {
 }
 
 export interface TransactionListResponse {
-  results: Transaction[];
+  results: { transactions: Transaction[] };
   count: number;
+}
+
+export interface TransactionFilterParams {
+  page?: number;
+  page_size?: number;
+  search?: string;
+  transaction_type?: string;
+  status?: string;
+  inventory?: string;
+  warehouse?: string;
+  start_date?: string;
+  end_date?: string;
+}
+
+export interface CreateTransactionRequest {
+  inventory: number;
+  transaction_type: string;
+  quantity: number;
+  notes?: string;
+  warehouse?: number;
+}
+
+export interface UpdateTransactionRequest {
+  id: number;
+  inventory?: number;
+  transaction_type?: string;
+  quantity?: number;
+  notes?: string;
+  warehouse?: number;
+}
+
+export interface CreateAndUpdateTransactionResponse {
+  id: number;
+  message: string;
+  transaction: Transaction;
+}
+
+export interface TransactionResponse {
+  transaction: Transaction;
+}
+
+export interface DeleteTransactionResponse {
+  message: string;
+}
+
+export interface CompleteTransactionResponse {
+  message: string;
+  transaction: Transaction;
+}
+
+export interface RejectTransactionRequest {
+  rejection_reason: string;
+}
+
+export interface RejectTransactionResponse {
+  message: string;
+  transaction: Transaction;
+}
+
+export interface BulkImportResponse {
+  message: string;
+  summary: {
+    total_rows: number;
+    accepted_rows: number;
+    rejected_rows: number;
+    success_rate: string;
+  };
+  errors: Array<{
+    row: number;
+    field: string;
+    message: string;
+  }>;
 }

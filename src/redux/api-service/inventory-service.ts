@@ -8,7 +8,7 @@ import type {
   InventoryResponse,
   InventoryFilterParams,
 } from "@/interface/inventory";
-import { setInventories } from "../slices/inventory-slice";
+import { setInventories, setPagination } from "../slices/inventory-slice";
 
 interface DeleteInventoryResponse {
   message: string;
@@ -31,6 +31,11 @@ export const inventoryService = createApi({
         try {
           const data = await queryFulfilled;
           dispatch(setInventories(data.data.results.inventory));
+          dispatch(
+            setPagination({
+              total: data.data.count,
+            }),
+          );
         } catch (error) {
           console.log(error);
         }

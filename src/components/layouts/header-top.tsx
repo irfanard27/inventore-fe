@@ -18,11 +18,17 @@ export default function HeaderTop() {
         {
           label: "Transactions",
           key: "transaction",
+          onClick: () => (window.location.href = "/transactions"),
         },
         {
           label: "Warehouse",
           key: "warehouse",
           onClick: () => (window.location.href = "/warehouse"),
+        },
+        {
+          label: "Category",
+          key: "category",
+          onClick: () => (window.location.href = "/category"),
         },
       ]}
     />

@@ -1,31 +1,31 @@
-import type { Warehouse } from "@/interface/warehouse";
+import type { Category } from "@/interface/category";
 import {
-  useGetWarehouseListQuery,
-  useDeleteWarehouseMutation,
-} from "@/redux/api-service/warehouse-service";
+  useGetCategoryListQuery,
+  useDeleteCategoryMutation,
+} from "@/redux/api-service/category-service";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import type { ColumnType } from "antd/es/table";
 
-interface WarehouseTableProps {
+interface CategoryTableProps {
   onEdit: (id: string) => void;
 }
 
-export default function WarehouseTable({ onEdit }: WarehouseTableProps) {
-  const { data: warehouseData, isLoading } = useGetWarehouseListQuery();
-  const warehouses = warehouseData?.warehouses || [];
+export default function CategoryTable({ onEdit }: CategoryTableProps) {
+  const { data: categoryData, isLoading } = useGetCategoryListQuery();
+  const categories = categoryData?.categories || [];
 
   const [modal, modalContext] = Modal.useModal();
 
-  const [_deleteWarehouse, { isLoading: isDeleting }] =
-    useDeleteWarehouseMutation();
+  const [_deleteCategory, { isLoading: isDeleting }] =
+    useDeleteCategoryMutation();
 
   const onDelete = (id: string) => {
     modal.confirm({
-      title: "Delete Warehouse",
-      content: "Are you sure you want to delete this warehouse?",
+      title: "Delete Category",
+      content: "Are you sure you want to delete this category?",
       onOk: () => {
-        _deleteWarehouse(id);
+        _deleteCategory(id);
       },
     });
   };
@@ -41,7 +41,7 @@ export default function WarehouseTable({ onEdit }: WarehouseTableProps) {
     );
   };
 
-  const columns: ColumnType<Warehouse>[] = [
+  const columns: ColumnType<Category>[] = [
     {
       title: "Name",
       dataIndex: "name",
@@ -73,7 +73,7 @@ export default function WarehouseTable({ onEdit }: WarehouseTableProps) {
   return (
     <>
       <Table
-        dataSource={warehouses}
+        dataSource={categories}
         loading={isLoading}
         rowKey="id"
         columns={columns}
